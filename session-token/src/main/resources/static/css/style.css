@@ -1,0 +1,150 @@
+/* dark charcoal theme, readable and professional */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root{
+  --bg: #1b1b1b;
+  --panel: #222;
+  --muted: #cfcfcf;
+  --accent: #ffb400;
+  --success: #28a745;
+  --info: #007bff;
+  --danger: #d9534f;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: #f3f3f3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* header */
+.site-header {
+  background: #121212;
+  padding: 18px 24px;
+  border-bottom: 1px solid #252525;
+}
+.site-header h1 { font-size: 1.15rem; font-weight: 600; color: #fff; }
+
+/* top nav */
+.top-nav {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  background: #1c1c1c;
+  border-bottom: 1px solid #2a2a2a;
+  justify-content: center;
+}
+.top-nav .tab {
+  background: none;
+  border: none;
+  color: var(--muted);
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background .18s, color .18s;
+  font-size: 0.95rem;
+}
+.top-nav .tab:hover { background: #2a2a2a; color: #fff; }
+.top-nav .tab.active { background: #2f2f2f; color: #fff; }
+
+/* main content */
+.content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 18px;
+  flex: 1;
+}
+
+/* sections */
+.content-section { display: none; padding: 18px 0; }
+.content-section.active { display: block; }
+.content-section h2 { color: var(--accent); margin-bottom: 10px; font-size: 1.15rem; }
+
+/* simulation grid */
+.sim-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 18px;
+  align-items: start;
+}
+
+/* auth panels (left) */
+.auth-panel .panel {
+  background: var(--panel);
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #2b2b2b;
+}
+.auth-panel .panel.small { display: flex; gap: 12px; align-items: center; justify-content: flex-start; }
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #151515;
+  color: #fff;
+}
+
+/* buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  background: #3a3a3a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn:hover { opacity: 0.9; }
+
+/* visual panel */
+.visual-panel { display: flex; flex-direction: column; gap: 12px; }
+
+/* simulation visuals */
+.sim-controls { display:flex; gap:8px; justify-content:center; }
+.token-visuals { display:flex; flex-direction:column; gap:8px; align-items:center; padding-top:8px; }
+
+.token-box {
+  width: 220px;
+  height: 72px;
+  border-radius: 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:#fff;
+  transition: opacity .4s, transform .35s, background .25s;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.token-box.access { background: var(--success); }
+.token-box.refresh { background: var(--info); }
+.token-box.revoked { background: var(--danger); color: #fff; }
+
+/* hidden state */
+.hidden { opacity: 0; transform: scale(.95); pointer-events: none; }
+
+/* results & session display */
+.result { margin-top:8px; font-size: .95rem; color: var(--muted); min-height: 22px; }
+.loading { display:inline-block; width:18px; height:18px; border-radius:50%; border:3px solid rgba(255,255,255,0.06); border-top:3px solid #888; animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.sim-output { text-align:center; color:#e6e6e6; margin-top:6px; min-height:20px; }
+
+/* session status tokens area (mirrors your updateSessionStatus output) */
+.session-status-wrapper { margin-top: 12px; }
+.session-status { padding: 10px; border-radius:6px; background:#151515; border:1px solid #262626; font-weight:600; margin-bottom:8px; }
+.tokens-container { background:#0f0f0f; padding:10px; border-radius:6px; border:1px solid #232323; font-family: monospace; font-size: .85rem; color: #ddd; min-height: 40px; }
+
+/* responsive */
+@media (max-width: 980px) {
+  .sim-grid { grid-template-columns: 1fr; }
+  .visual-panel { order: -1; }
+}

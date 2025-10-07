@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Implement Secure Session Token Generation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <h1>Implement Secure Session Token Generation</h1>
+</header>
+
+<nav class="top-nav">
+    <button class="tab active" data-target="home">Home</button>
+    <button class="tab" data-target="introduction">Introduction</button>
+    <button class="tab" data-target="objective">Objective</button>
+    <button class="tab" data-target="theory">Theory</button>
+    <button class="tab" data-target="simulation">Simulation</button>
+    <button class="tab" data-target="procedure">Procedure</button>
+    <button class="tab" data-target="conclusion">Conclusion</button>
+</nav>
+
+<main class="content">
+    <section id="home" class="content-section active">
+        <h2>Home</h2>
+        <p>Welcome — this project demonstrates a secure token-based authentication system (JWT access tokens + opaque refresh tokens, rotation & revocation).</p>
+    </section>
+
+    <section id="introduction" class="content-section">
+        <h2>Introduction</h2>
+        <p>Sessions are protected using short-lived access tokens and long-lived refresh tokens. Refresh tokens are stored hashed in the database and rotated on use.</p>
+    </section>
+
+    <section id="objective" class="content-section">
+        <h2>Objective</h2>
+        <ol>
+            <li>Implement secure token generation and storage</li>
+            <li>Apply token rotation and revocation</li>
+            <li>Provide a simple UI to exercise the endpoints</li>
+        </ol>
+    </section>
+
+    <section id="theory" class="content-section">
+        <h2>Theory</h2>
+        <p>Access tokens (JWT) — short-lived and stateless. Refresh tokens — opaque, server-validated, stored hashed (SHA-256). Rotation prevents replay; revocation supports logout/all-devices.</p>
+    </section>
+
+    <section id="simulation" class="content-section">
+        <h2>Simulation</h2>
+        <p>Use the controls below to talk to your Spring Boot backend. Make sure your backend is running at <code>http://localhost:8080</code>.</p>
+
+        <div class="sim-grid">
+            <!-- Left: Auth controls (these call your original JS functions) -->
+            <div class="auth-panel">
+                <div class="panel">
+                    <h3>Sign Up</h3>
+                    <input id="signupUser" class="form-input" placeholder="Username" />
+                    <input id="signupPass" class="form-input" placeholder="Password" type="password" />
+                    <button class="btn" onclick="signup()">Create Account</button>
+                    <div id="signupResult" class="result"></div>
+                </div>
+
+                <div class="panel">
+                    <h3>Login</h3>
+                    <input id="loginUser" class="form-input" placeholder="Username" />
+                    <input id="loginPass" class="form-input" placeholder="Password" type="password" />
+                    <button class="btn" onclick="login()">Login</button>
+                    <div id="loginResult" class="result"></div>
+                </div>
+
+                <div class="panel small">
+                    <button class="btn" onclick="refreshTokens()">Refresh Tokens</button>
+                    <div id="refreshResult" class="result"></div>
+                </div>
+
+                <div class="panel small">
+                    <button class="btn" onclick="logout()">Logout</button>
+                    <div id="logoutResult" class="result"></div>
+                </div>
+            </div>
+
+            <!-- Right: Visual simulation + session display -->
+            <div class="visual-panel">
+                <div class="sim-controls">
+                    <button id="btnSimLogin" class="btn">Simulate Login</button>
+                    <button id="btnSimRefresh" class="btn">Simulate Refresh</button>
+                    <button id="btnSimLogout" class="btn">Simulate Logout</button>
+                </div>
+
+                <div class="token-visuals">
+                    <div id="accessTokenBox" class="token-box hidden">Access Token</div>
+                    <div id="refreshTokenBox" class="token-box hidden">Refresh Token</div>
+                </div>
+
+                <div id="simOutput" class="sim-output">Click "Simulate Login" to begin (or use the Login form to call your backend).</div>
+
+                <div class="session-status-wrapper">
+                    <div id="sessionStatus" class="session-status">No Active Session</div>
+                    <div id="tokens" class="tokens-container"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="procedure" class="content-section">
+        <h2>Procedure</h2>
+        <ol>
+            <li>Signup with a username/password (BCrypt on backend)</li>
+            <li>Login to receive access + refresh token</li>
+            <li>Use access token for API calls</li>
+            <li>Refresh when needed (rotation)</li>
+            <li>Logout to revoke tokens</li>
+        </ol>
+    </section>
+
+    <section id="conclusion" class="content-section">
+        <h2>Conclusion</h2>
+        <p>The backend uses token rotation, hashed refresh storage, and device fingerprinting for secure session management.</p>
+    </section>
+</main>
+
+<script src="js/script.js"></script>
+</body>
+</html>
